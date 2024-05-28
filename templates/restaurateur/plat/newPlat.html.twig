@@ -1,0 +1,17 @@
+{% extends 'baseRestaurateur.html.twig' %}
+
+{% block title %}
+    Nouveau plat
+{% endblock %}
+
+{% block body %}
+        <div class="container p-3 my-3 border">
+<h2>Création d'un plat</h2>
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+
+    <input type="submit" class="btn btn-primary custom-btn" value="Enregistrer"/>
+{{ form_end(form) }}
+        </div>
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'baseRestaurateur.html.twig' %}
+
+{% block title %}
+    Mise à jour d'un plat
+{% endblock %}
+
+{% block body %}
+            <div class="container p-3 my-3 border">
+
+    <h1>Mise à jour d'un plat</h1>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+
+    <input type="submit" class="btn btn-primary custom-btn" value="Enregistrer"/>
+    {{ form_end(form) }}
+            </div>
+{% endblock %}

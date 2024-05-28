@@ -1,0 +1,68 @@
+{#Integration du fichier base.html.twig#}
+{% extends 'baseClient.html.twig' %}
+
+{#Titre de la page#}
+{% block title %}Nouveau Mot de Passe{% endblock %}
+
+{#Corps de la page#}
+{% block body %}
+<center>
+    {#Afficher message d'erreur si erreur mot de passe#}
+    {% if err == true %}
+        <div id="errorAlert" class="alert alert-danger alert-dismissible fade show position-absolute" role="alert" style="position:relative; top: 10px; right: 10px; z-index: 100;">
+            <strong>Erreur : </strong>
+            {{ errmsg }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Fechar">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <script>
+            // Afficher l'erreur avec un script javascript
+            document.addEventListener('DOMContentLoaded', function () {
+                document.getElementById('errorAlert').style.display = 'block';
+            });
+
+            // Optionnel : Fermer le message d'erreur automatiquement au bout de 5 secondes
+            setTimeout(function () {
+                document.getElementById('errorAlert').style.display = 'none';
+            }, 5000); // 5000 millisecondes = 5 secondes
+        </script>
+    {% endif %}
+    {#Conteneur Principal#}
+    <br><br>
+    <div class="card shadow mb-4 col-md-6">
+        <div class="card-header py-3">
+            {#Element titre du conteneur principal#}
+            <h6 class="m-0 font-weight-bold text-danger">Changement du mot de passe</h6>
+        </div>
+        <div class="card-body">
+            <h1>Mot de passe</h1>
+            {#Debut du formulaire#}
+            {{ form_start(changePassForm) }}
+
+            <div>
+                {#Style pour le formulaire#}
+                {% form_theme changePassForm 'bootstrap_4_layout.html.twig' %}
+                {#Champ Ancien Mot de Passe du formulaire#}
+                {#Champ nouveau Mot de Passe du formulaire#}
+                <div class="col-md-6">
+                    {{ form_label(changePassForm.newPlainPass1, "Nouveau mot de passe") }}
+                    {{ form_widget(changePassForm.newPlainPass1, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                {#Champ confirmer nouveau mot de passe du formulaire#}
+                <div class="col-md-6">
+                    {{ form_label(changePassForm.newPlainPass2, "Confirmer le mot de passe") }}
+                    {{ form_widget(changePassForm.newPlainPass2, {'attr': {'class': 'form-control'}}) }}
+                </div>
+
+                <br>
+                {#bouton envoyer du formulaire#}
+                <button type="submit" class="btn btn-danger">Modifier le mot de passe</button>
+            </div>
+            {#Fermeture du formulaire#}
+            {{ form_end(changePassForm) }}
+            <br>
+        </div>
+    </div>
+</center>
+{% endblock %}

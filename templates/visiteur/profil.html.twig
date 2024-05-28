@@ -1,0 +1,29 @@
+{% extends "baseClient.html.twig" %}
+{% block title %}
+    EasyFood | Mon Profil
+{% endblock %}
+
+{% block body %}
+    <div style="margin-top: 100px; background-color: #ed8185; color:white; padding: 20px; border-radius: 3rem 0 3rem 0;" class="container text-center">    
+        <div class="row align-items-center">
+            <div class="col">
+                <h1><b> Mon Profil</b></h1> 
+                <p>Nom : {{ user.nomUtilisateur }} </p>
+
+                <p>Prenom : {{ user.prenomUtilisateur }}</p>
+
+                <p>Ville : {{ user.villeUtilisateur }}</p>
+
+                <p>Rue : {{ user.rueUtilisateur }}</p>
+
+                <p>Code postal : {{ user.cpUtilisateur }}</p>
+
+                <p>Numero de rue : {{ user.numRueUtilisateur }}</p>
+                <button class="btn btn-lg btn-primary "><a href="{{ path("profil_client_modifier") }}" style="color:#fff;">Modifier Mon Profil</a></button>
+                <br>
+                <br>
+                <button class="btn btn-lg btn-danger "><a href="{{ path('profil_client_delete') }}" style="color:#fff;">Supprimer mon compte</a></button>
+            </div>
+        </div>
+    </div>
+{% endblock %}

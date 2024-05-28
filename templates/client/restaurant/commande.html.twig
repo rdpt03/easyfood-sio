@@ -1,0 +1,108 @@
+{% extends "baseClient.html.twig" %}
+
+{% block title %}
+    EasyFood | Confirmation de Commande
+{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <div class="text-center mb-4">
+            <h1 class="display-4">Votre Commande</h1>
+            <p class="lead">Vérifiez votre commande avant de procéder au paiement.</p>
+        </div>
+        <div class="card shadow">
+            <ul class="list-group list-group-flush">
+                {% for QuantitePlat in commande %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>{{ QuantitePlat.lePlat.nomPlat }}</span>
+                        <div class="d-flex align-items-center">
+                            <!-- Bouton pour diminuer la quantité -->
+                            <button type="button" class="btn btn-outline-secondary btn-sm">-</button>
+
+                            <span class="badge badge-primary rounded-pill mx-2">X{{ QuantitePlat.quantite }}</span>
+
+
+                            <button type="button" class="btn btn-outline-secondary btn-sm">+</button>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+            <div class="card-footer text-muted d-flex justify-content-between align-items-center">
+                Total: <strong>{{ prix | number_format(2, '.', ',') }} €</strong>
+                <button type="button" class="btnCommander btn" data-toggle="modal" data-target="#confirmOrderModal">
+                    Commander
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="confirmOrderModal" tabindex="-1" role="dialog" aria-labelledby="confirmOrderModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmOrderModalLabel">Confirmation de Commande</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                </div>
+                <div class="modal-footer">
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <style>
+
+    .container {
+        max-width: 800px;
+    }
+    .card {
+        border-radius: 0.5rem;
+    }
+    .card-header, .card-footer {
+        background-color: #f8f9fa;
+        border-bottom: 0;
+    }
+    .badge {
+        font-size: 1em;
+    }
+    .btn-success {
+        padding: 0.5rem 1.5rem;
+        font-size: 1.1em;
+    }
+    .modal-content {
+        border-radius: 0.5rem;
+    }
+    .modal-header, .modal-footer {
+        border-bottom: 0;
+        border-top: 0;
+    }
+    .btn-close {
+        background: none;
+        border: none;
+    }
+        .badge{
+        background-color: #c83c51;
+        color:#fff;
+    }
+    .btnCommander{
+        background-color: #c83c51;
+        color:white;
+    }
+    .btnCommander:hover{
+        background-color: #ed8185;
+        border:white
+    }
+    .cardCommande{
+        background-color: #ed8184;
+        color: white;
+    }
+</style>
+{% endblock %}

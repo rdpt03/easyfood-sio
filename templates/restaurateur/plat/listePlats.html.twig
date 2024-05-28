@@ -1,0 +1,38 @@
+{% extends 'baseRestaurateur.html.twig' %}
+
+{% block title %}
+    Liste des plats par restaurant
+{% endblock %}
+
+{% block body %}
+    <style>
+        /* Vos styles CSS ici */
+    </style>
+    <div class="container p-3 my-3 border">
+        <a href="{{ path('new_plat') }}" class="btn btn-primary">Ajouter un plat</a>
+        <a href="{{ path('new_type_plat') }}" class="btn btn-primary">Ajouter un type de plat</a>
+    </div>
+    {% for resto in mesRestaurants %}
+        <div class="container p-3 my-3 border">
+            <h3>{{ resto.nomRestaurant}}</h3>
+            <div class="row">
+                {% for plat in resto.lesPlats %}
+                    <div class="col-md-4">
+                        <div class="card mb-3">
+                            <img src="{{ app.request.basePath }}/../public/element/plat/{{ plat.id }}.png" class="card-img-top" alt="{{ plat.nomPlat }}">
+                            <div class="card-body">
+                                <h5><a href="{{ path('detail_plat', {id: plat.id}) }}" class="card-title">{{ plat.nomPlat }}</a></h5>
+                                <p class="card-text">{{ plat.descriptionPlat }}</p>
+                                <p class="card-text">{{ plat.leRestaurant }}</p>
+                                <div class="center-buttons">
+                                    <a href="{{ path('detail_plat', {id: plat.id}) }}" class="btn btn-primary btn-sm">Voir détails</a>
+                                    <a href="{{ path('upd_plat', {id: plat.id}) }}" class="btn btn-danger btn-sm">Modifier</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

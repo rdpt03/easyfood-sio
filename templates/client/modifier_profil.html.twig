@@ -1,0 +1,28 @@
+{% extends 'baseClient.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    <div style="margin-top: 100px; background-color: #ed8185; color:white; padding: 20px; border-radius: 3rem 0 3rem 0;" class="container text-center">
+        <h1 class="h3 mb-3 font-weight-normal text-center">Modifier mes cordonnées</h1>
+        
+        {{ form_errors(registrationForm) }}
+        
+        {{ form_start(registrationForm) }}&nbsp
+        
+        {{ form_label(registrationForm.nomUtilisateur,"Votre nom") }} : <br>{{ form_widget(registrationForm.nomUtilisateur) }}<br>
+
+        {{ form_label(registrationForm.prenomUtilisateur,"Votre Prenom") }} : <br>{{ form_widget(registrationForm.prenomUtilisateur) }}<br>
+
+        {{ form_label(registrationForm.villeUtilisateur,"Ville") }} : <br>{{ form_widget(registrationForm.villeUtilisateur) }}<br>
+
+        {{ form_label(registrationForm.rueUtilisateur,"Rue") }} : <br>{{ form_widget(registrationForm.rueUtilisateur) }}<br>
+
+        {{ form_label(registrationForm.cpUtilisateur,"Code Postal") }} : <br>{{ form_widget(registrationForm.cpUtilisateur) }}<br>
+
+        {{ form_label(registrationForm.numRueUtilisateur,"Numero de rue") }} : <br>{{ form_widget(registrationForm.numRueUtilisateur) }}<br>
+        <br><br>
+        <button type="submit" class="btn btn-lg btn-primary ">Modifier</button>
+        {{ form_end(registrationForm) }}
+    </div>
+{% endblock %}

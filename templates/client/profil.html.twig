@@ -1,0 +1,67 @@
+{% extends "baseClient.html.twig" %}
+{% block title %}
+    EasyFood | Mon Profil
+{% endblock %}
+
+{% block body %}
+    <div style="margin-top: 100px; background-color: #ed8185; color:white; padding: 20px; border-radius: 3rem 0 3rem 0;" class="container text-center">    
+        <div class="row align-items-center">
+            <div class="col">
+                <h1><b> Mon Profil</b></h1> 
+                <p>Nom : {{ user.nomUtilisateur }} </p>
+
+                <p>Prenom : {{ user.prenomUtilisateur }}</p>
+
+                <p>Ville : {{ user.villeUtilisateur }}</p>
+
+                <p>Rue : {{ user.rueUtilisateur }}</p>
+
+                <p>Code postal : {{ user.cpUtilisateur }}</p>
+                
+                <p>Numero de rue : {{ user.numRueUtilisateur }}</p>
+                <button class="btn btn-lg btn-primary "><a href="{{ path("profil_client_modifier") }}" style="color:#fff;">Mettre a jour mon profil</a></button>
+                <br>
+                <br>
+                <button class="btn btn-lg btn-secondary "><a href="{{ path("modifier_mon_mdp") }}" style="color:#fff;">changer le mot de passe</a></button>
+                <br>
+                <br>
+                <button class="btn btn-lg btn-danger "><a href="{{ path('profil_client_delete') }}" style="color:#fff;">Supprimer mon compte</a></button>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-4">
+        <h1>Mes Commandes</h1>
+        <div class="row">
+            <div class="col-md-12">
+                {% for i in 0..lesCommandes|length - 1 %}
+                    <div class="card mb-4">
+                        <div class="card-header cardCommande">
+                            {{ lesCommandes[i].lesQuantitesPlats[0].lePlat.leRestaurant.nomRestaurant }}<br>
+                            Commande du {{ lesCommandes[i].dateCommande|date("m/d/Y") }}
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Détails de la commande</h5>
+                            <p class="card-text">{{ lesCommandes[i].commentaireClientCommande }}</p>
+                            <ul class="list-group">
+                                {% for QuantitePlat in lesCommandes[i].lesQuantitesPlats %}
+                                    <li class="list-group-item">
+                                        {{ QuantitePlat.lePlat.nomPlat }} &times;x{{ QuantitePlat.quantite }}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="card-footer cardCommande">
+                            Livraison prévue le {{ lesCommandes[i].dateLivrCommande|date("m/d/Y") }}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+<style>
+.cardCommande{
+    background-color: #ed8184;
+    color: white;
+}
+</style>
+{% endblock %}

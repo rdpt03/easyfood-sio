@@ -1,0 +1,79 @@
+{% extends "base.html.twig" %}
+{% block title %}
+    EasyFood | Plats
+{% endblock %}
+
+{% block body %}
+    <style>
+
+        .card-img-top {
+            width: 20rem;
+            height: 18rem;
+        }
+
+        .card {
+            width: 20rem;
+            margin: 1rem;
+        }
+
+        .center-buttons {
+            display: flex; 
+            justify-content: center;
+
+        }
+
+        .btn-sm{
+            margin: 5px;
+        }
+
+
+    </style>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"  crossorigin="anonymous">
+</head>
+<div style="min-width: 100vw" class="secondaryBackground">
+<a class="btnFilter btn" href="#" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    <img width="50rem" height="50rem" src="{{ app.request.basePath }}/../public/element/more.svg" alt="More">
+</a>
+
+    <div class="collapse" id="collapseExample">
+        <div class="card card-body secondaryBackground whiteType">
+             {{ form_start(formSearch) }}
+            {{ form_widget(formSearch) }}
+
+        <input type="submit"  value="Enregistrer"/>
+        {{ form_end(formSearch) }}
+        </div>
+    </div>
+</div>
+
+
+    <div class="container p-3 my-3 border">
+        {% for resto in lesRestaurants %}
+            <div class="row">
+                <h2>{{ resto.nomRestaurant }}</h2>
+            </div>
+                <div class="row">
+                    {% for plat in resto.lesPlats %}
+                        <div class="col-md-4">
+                            <div class="card mb-3">
+                                <img src="{{ app.request.basePath }}/../public/element/plat/{{ plat.id }}" class="card-img-top" alt="{{ plat.nomPlat }}">
+                                <div class="card-body">
+                                    <h5><a href="#" class="card-title">{{ plat.nomPlat }}</a></h5>
+                                    <p class="card-text">{{ plat.descriptionPlat }}</p>
+                                    <p class="card-text">{{ plat.leRestaurant }}</p>
+                                    <div class="center-buttons">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% if loop.index % 3 == 0 %}</div><div class="row">{% endif %}
+                    {% endfor %}
+                </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
+
+

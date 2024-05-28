@@ -1,0 +1,62 @@
+{% extends 'baseRestaurateur.html.twig' %}
+
+{% block title %}
+    Détail d'un plat
+{% endblock %}
+
+{% block body %}
+    <style>
+        
+        .card-img-top {
+            width: 20rem; 
+            height: 18rem; 
+        }
+        
+        .card {
+            width: 20rem;
+            margin: 1rem;
+        }
+        
+        .center-buttons {
+            display: flex;
+            justify-content: center;
+            
+        }
+        
+        .btn-sm{
+            margin: 5px;
+        }
+        
+        
+        
+    </style>
+    <div class="container p-3 my-3 border" >
+        <a href="{{ path('new_restaurant')}}" class="btn btn-primary">Ajouter un restaurant</a>
+
+    </div> 
+ <div class="container p-3 my-3 border">
+        <div class="row">
+            {% if mesRestaurants is not empty %}
+            {% for element in mesRestaurants %}
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <img src="{{ app.request.basePath }}/../public/element/restaurant/{{element.id}}.png" class="card-img-top" alt="{{ element.nomRestaurant }}">
+                        <div class="card-body">
+                            <h5><a href="{{ path('detail_restaurant', {id: element.id}) }}" class="card-title">{{ element.nomRestaurant }}</a></h5>
+                            <p class="card-text">{{ element.villeRestaurant }}</p>
+                            <p class="card-text">Horaires : {{ element.heureOuverture }}-{{ element.heureFermeture }}</p>
+                            <div class="center-buttons">
+                            <a href="{{ path('detail_restaurant', {id: element.id}) }}" class="btn btn-primary btn-sm">Voir détails</a>
+                            <a href="{{ path('upd_restaurant', {id: element.id}) }}" class="btn btn-danger btn-sm">Modifier</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% if loop.index % 3 == 0 %}</div><div class="row">{% endif %}
+            {% endfor %}
+            {% else  %}<h1 class="text-center">Vous n'avez aucun restaurant !</h1>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,110 @@
+{% extends "base.html.twig" %}
+{% block title %}
+    EasyFood | {{ leRestaurant.nomRestaurant }}
+{% endblock %}
+
+{% block body %}
+    <style>
+
+        .card-img-top {
+            width: 20rem;
+            height: 18rem;
+        }
+
+        .card {
+            width: 20rem;
+            margin: 1rem;
+        }
+
+        .center-buttons {
+            display: flex; 
+            justify-content: center;
+
+        }
+
+        .btn-sm{
+            margin: 5px;
+        }
+
+
+    </style>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"  crossorigin="anonymous">
+</head>
+<div style="min-width: 100vw" class="secondaryBackground">
+<a class="btnFilter btn" href="#" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    <img width="50rem" height="50rem" src="/~lgaray/EasyFood/public/element/more.svg" alt="More">
+</a>
+
+    <div class="collapse" id="collapseExample">
+        <div class="card card-body secondaryBackground whiteType">
+            
+        </div>
+    </div>
+</div>
+
+
+<div class="container p-3 my-3 border">
+    <div class="row">
+        {% for plat in leRestaurant.lesPlats %}
+            <div class="col-md-4">
+                <div class="card mb-3">
+                    <img src={{ asset("/~lgaray/EasyFood/public/element/plat/"~plat.id )}} class="card-img-top" alt="{{ plat.nomPlat }}">
+                    <div class="card-body">
+                        <h5><a href="#" class="card-title">{{ plat.nomPlat }}&nbsp|&nbsp{{ plat.prixClientPlat }}€</a></h5>
+                        <p class="card-text">{{ plat.descriptionPlat }}</p>
+                        <p class="card-text">{{ plat.leRestaurant }}</p>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAjouterPlat{{ plat.id }}">
+                            Ajouter à ma commande
+                        </button>
+
+                        <!-- Fenêtre modale -->
+                        <div class="modal" id="modalAjouterPlat{{ plat.id }}" tabindex="-1" role="dialog" aria-labelledby="maModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    {% if app.session.get("leResto") == plat.leRestaurant.nomRestaurant or app.session.get("leResto") is null%}
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="maModalLabel">{{plat.nomPlat}}</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <a class="btn btn-primary" href="{{ path('ajouter_commande',{id: plat.id}) }}">Ajouter à ma commande</a>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                        </div>
+                                    {% else %}
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="maModalLabel">
+                                                Vous avez déjà une commande provenant d'un autre restaurant,voulez vous commencer une nouvelle commande ? 
+                                            </h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h3>Ajouter {{ plat.nomPlat }} ?</h3><br>
+                                            <a class="btn btn-primary" href="{{ path('commencerNvlle_commande',{id: plat.id}) }}">Ajouter à ma commande</a>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                        </div>
+
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="center-buttons">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% if loop.index % 3 == 0 %}</div><div class="row">{% endif %}
+            {% endfor %}
+
+    </div>
+</div>
+{% endblock %}

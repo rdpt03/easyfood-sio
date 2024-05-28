@@ -1,0 +1,22 @@
+{# empty Twig template #}
+{% extends 'baseRestaurateur.html.twig' %}
+
+{% block title %}
+    Detail d'un restaurant
+{% endblock %}
+
+{% block body %}
+    <div class="container p-3 my-3 border">
+
+        <h2>
+            Restaurant : {{ unRestaurant.nomRestaurant }}
+            <a href="{{ path('upd_restaurant', {id: unRestaurant.id}) }}"><button class="btn btn-primary  custom-btn">modifier</button></a>
+            <a href="{{ path('del_restaurant', {id: unRestaurant.id}) }}"><button class="btn btn-danger">supprimer</button></a>
+        </h2>
+        <div>
+            <p>Ville du restaurant : {{ unRestaurant.villeRestaurant }}</p>
+            <p>Heure d'ouverture : {% if unRestaurant.heureOuverture is not null %}{{ unRestaurant.heureOuverture }}{% else %}Non spécifié{% endif %}</p>
+            <p>Heure de fermeture : {% if unRestaurant.heureFermeture is not null %}{{ unRestaurant.heureFermeture }}{% else %}Non spécifié{% endif %}</p>
+        </div>
+    </div>
+{% endblock %}

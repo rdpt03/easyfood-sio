@@ -1,0 +1,25 @@
+{# empty Twig template #}
+{% extends 'baseRestaurateur.html.twig' %}
+
+{% block title %}
+    Detail d'un plat
+{% endblock %}
+
+{% block body %}
+    <div class="container p-3 my-3 border">
+
+        <h2>
+            Plat : {{ unPlat.nomPlat }}
+            <a href="{{ path('upd_plat', {id: unPlat.id}) }}"><button class="btn btn-primary  custom-btn">modifier</button></a>
+            <a href="{{ path('del_plat', {id: unPlat.id}) }}"><button class="btn btn-danger">supprimer</button></a>
+        </h2>
+        <div>
+            <p>Prix Fournisseur : {{ unPlat.prixFournisseurPlat }}</p>
+            <p>Prix Client : {% if unPlat.prixClientPlat is not null %}{{ unPlat.prixClientPlat }}{% else %}Non spécifié{% endif %}</p>
+            <p>Plat Visible : {% if unPlat.platVisible %}Oui{% else %}Non{% endif %}</p>
+            <p>Photo du Plat : {% if unPlat.photoPlat is not null %}<img src="{{ app.request.basePath }}/../public/element/plat/{{ unPlat.photoPlat }}" alt="{{ unPlat.photoPlat }}" width="100">{% else %}Non disponible{% endif %}</p>
+            <p>Description : {% if unPlat.descriptionPlat is not null %}{{ unPlat.descriptionPlat }}{% else %}Aucune description{% endif %}</p>
+            <p>Type du plat : {% if unPlat.leTypePlat is not null %}{{ unPlat.leTypePlat.libelleTypePlat }}{% else %}Aucun type pour ce plat{% endif %}</p>
+        </div>
+    </div>
+{% endblock %}
